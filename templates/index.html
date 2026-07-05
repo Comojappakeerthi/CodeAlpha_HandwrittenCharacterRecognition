@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Digit Notebook — Handwritten Recognition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="hero">
+      <span class="eyebrow">CodeAlpha · Machine Learning Internship</span>
+      <h1 class="title">Character <span class="title-accent">Notebook</span></h1>
+      <p class="subtitle">Write a digit or letter like you would in the margin of a page. A CNN grades it in real time.</p>
+    </header>
+
+    <div class="mode-toggle" role="tablist" aria-label="Recognition mode">
+      <button id="modeDigits" class="mode-btn active" role="tab" aria-selected="true">Digits <span class="mode-sub">0–9 · MNIST</span></button>
+      <button id="modeLetters" class="mode-btn" role="tab" aria-selected="false">Letters <span class="mode-sub">a–z · EMNIST</span></button>
+    </div>
+
+    <main class="workspace">
+
+      <section class="notebook-panel">
+        <div class="margin-rule"></div>
+        <canvas id="canvas" width="280" height="280" aria-label="Drawing canvas for a single character"></canvas>
+        <div class="panel-actions">
+          <button id="clearBtn" class="btn btn-ghost">Clear page</button>
+          <button id="predictBtn" class="btn btn-primary">Grade it</button>
+        </div>
+        <p class="hint" id="hintText">Draw one digit, 0–9, filling most of the box.</p>
+      </section>
+
+      <section class="result-panel" id="resultPanel">
+        <div class="result-empty" id="resultEmpty">
+          <span class="pencil-icon">✎</span>
+          <p>Your grade will appear here.</p>
+        </div>
+
+        <div class="result-filled" id="resultFilled" hidden>
+          <div class="grade-mark">
+            <svg viewBox="0 0 120 120" class="circle-svg" aria-hidden="true">
+              <circle cx="60" cy="60" r="50" />
+            </svg>
+            <span id="predictedDigit">0</span>
+          </div>
+          <p class="confidence-label">Confidence: <span id="confidenceValue">0%</span></p>
+
+          <div class="scores" id="scores"></div>
+        </div>
+
+        <div class="result-error" id="resultError" hidden>
+          <p id="errorText"></p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>Model: CNN (Conv32 → Pool → Conv64 → Pool → Dense128 → Softmax10) · Trained on MNIST · ~99% test accuracy</p>
+    </footer>
+
+  </div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
