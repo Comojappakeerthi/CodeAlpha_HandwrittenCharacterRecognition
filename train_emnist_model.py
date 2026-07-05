@@ -30,11 +30,15 @@ print("Test examples:", ds_info.splits["test"].num_examples)
 
 def preprocess(image, label):
     image = tf.cast(image, tf.float32) / 255.0
+
     # EMNIST source images are stored rotated/mirrored relative to the
-    # "natural" reading orientation; this fixes that.
+    # natural reading orientation; this fixes that.
     image = tf.image.rot90(image, k=3)
     image = tf.image.flip_left_right(image)
-    label = label - 1  # original labels are 1-26 -> remap to 0-25
+
+    # Original labels are 1-26 -> remap to 0-25
+    label = label - 1
+
     return image, label
 
 
