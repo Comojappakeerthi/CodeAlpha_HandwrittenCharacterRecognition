@@ -1,14 +1,4 @@
-"""
-train_emnist_model.py
-Trains a CNN on EMNIST "letters" (26 classes: a-z, case-merged) and saves
-it as models/emnist_letters_model.keras
 
-Run this ONCE locally, after train_model.py, before starting app.py, if you
-want letter recognition in addition to digit recognition.
-
-Requires: pip install tensorflow-datasets
-(this downloads the EMNIST dataset the first time it runs — needs internet)
-"""
 
 import os
 
